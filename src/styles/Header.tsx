@@ -10,11 +10,11 @@ export const HeaderWarp = styled.div`
 `;
 
 export const IconWrap = styled.div`
-  width: 130px;
+  width: 200px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 `;
 
@@ -27,4 +27,5 @@ export const Text = styled.div`
   font-family: Meongi, SansSerif;
   text-align: center;
   color: darkorange;
+  font-size: 30px;
 `;

@@ -1,4 +1,4 @@
-import React, { useRef, useState, ChangeEvent, FormEvent } from 'react';
+import React, { useRef, useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import {Button, MainText, Wrap, SubText, ImageBox, BoxWrap, Form} from "../styles/Content";
 
@@ -7,6 +7,12 @@ function Content() {
     const [preview, setPreview] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [isUploaded, setIsUploaded] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (file) {
+            setIsUploaded(false);
+        }
+    }, [file]);
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0];
@@ -24,21 +30,23 @@ function Content() {
     };
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        console.log("upload")
+        console.log('handle submit');
         event.preventDefault();
         if (!file) return;
+        console.log(file);
 
         const formData = new FormData();
         formData.append('file', file);
 
         try {
-            const response = await axios.post('http://localhost:5000/upload', formData, {
+            const response = await axios.post(`${process.env.REACT_APP_PATH}/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
             console.log('File uploaded successfully', response.data);
             setIsUploaded(true);
+            console.log("upload")
         } catch (error) {
             console.error('Error uploading file', error);
         }
