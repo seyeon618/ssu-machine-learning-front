@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+}
+
+@font-face {
+    font-family: "Meongi";
+    font-weight: normal;
+    src: url("./asset/font/Cafe24Meongi-W-v1.0.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Jamsil_light";
+    font-weight: normal;
+    src: url("./asset/font/The Jamsil 2 Light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Jamsil_Medium";
+    font-weight: normal;
+    src: url("./asset/font/The Jamsil 4 Medium.ttf") format("truetype");
+}
