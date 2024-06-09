@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-  width: 100%;
+  width: 90%;
   height: 100%;
-  padding-top: 70px;
+  padding-top: 200px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin: 0 auto;
 `;
 
 export const MainText = styled.div`
@@ -25,13 +26,19 @@ export const SubText = styled.div`
   text-align: center;
 `;
 
-export const BoxWrap = styled.div`
+export const ContentWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 100px;
   margin-top: 30px;
+`;
+
+export const BoxWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 export const ImageBox = styled.div`
@@ -63,4 +70,33 @@ export const Form = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const Image = styled.img`
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+`;
+
+export const DescWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Desc = styled.div`
+  font-size: 25px;
+  font-family: Jamsil_light, SansSerif;
+  text-align: center;
+  color: #6F6D6D;
+`;
+
+export const Input = styled.input`
+  width: 80px;
+  height: 35px;
+  font-size: 20px;
+  font-family: Jamsil_light, SansSerif;
+  text-align: center;
 `;

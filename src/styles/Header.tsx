@@ -7,6 +7,8 @@ export const HeaderWarp = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: fixed;
+  background-color: white;
 `;
 
 export const IconWrap = styled.div`

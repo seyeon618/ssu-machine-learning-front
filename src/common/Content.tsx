@@ -1,83 +1,154 @@
-import React, { useRef, useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import React, {useRef, useContext, ChangeEvent, useState} from 'react';
 import axios from 'axios';
-import {Button, MainText, Wrap, SubText, ImageBox, BoxWrap, Form} from "../styles/Content";
+import {
+    Button,
+    Desc,
+    DescWrap,
+    MainText,
+    Wrap,
+    SubText,
+    ImageBox,
+    ContentWrap,
+    BoxWrap,
+    Form,
+    Image,
+    Input,
+} from "../styles/Content";
+import {AppContext} from "../Context";
 
 function Content() {
-    const [file, setFile] = useState<File | null>(null);
-    const [preview, setPreview] = useState<string | null>(null);
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [isUploaded, setIsUploaded] = useState<boolean>(false);
+    const context = useContext(AppContext);
 
-    useEffect(() => {
-        if (file) {
-            setIsUploaded(false);
-        }
-    }, [file]);
+    if (!context) {
+        throw new Error('Content must be used within an AppProvider');
+    }
 
-    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const {
+        firstFile, setFirstFile,
+        secondFile, setSecondFile,
+        firstInputValue, setFirstInputValue,
+        secondInputValue, setSecondInputValue,
+    } = context;
+
+    const [firstPreview, setFirstPreview] = useState<string | null>(null);
+    const firstFileInputRef = useRef<HTMLInputElement | null>(null);
+    const [secondPreview, setSecondPreview] = useState<string | null>(null);
+    const secondFileInputRef = useRef<HTMLInputElement | null>(null);
+
+    const handleFirstFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0];
         if (selectedFile) {
-            setFile(selectedFile);
+            setFirstFile(selectedFile);
 
             const reader = new FileReader();
             reader.onloadend = () => {
                 if (typeof reader.result === 'string') {
-                    setPreview(reader.result);
+                    setFirstPreview(reader.result);
                 }
             };
             reader.readAsDataURL(selectedFile);
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_PATH}/firstImageUpload`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                console.log('File uploaded successfully', response.data);
+            } catch (error) {
+                console.error('Error uploading file', error);
+            }
         }
     };
 
-    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        console.log('handle submit');
-        event.preventDefault();
-        if (!file) return;
-        console.log(file);
+    const handleSecondFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = event.target.files?.[0];
+        if (selectedFile) {
+            setSecondFile(selectedFile);
 
-        const formData = new FormData();
-        formData.append('file', file);
-
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_PATH}/upload`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                if (typeof reader.result === 'string') {
+                    setSecondPreview(reader.result);
                 }
-            });
-            console.log('File uploaded successfully', response.data);
-            setIsUploaded(true);
-            console.log("upload")
-        } catch (error) {
-            console.error('Error uploading file', error);
+            };
+            reader.readAsDataURL(selectedFile);
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_PATH}/secondImageUpload`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                console.log('File uploaded successfully', response.data);
+            } catch (error) {
+                console.error('Error uploading file', error);
+            }
         }
     };
 
-    const handleButtonClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
+    const handleFirstButtonClick = () => {
+        if (firstFileInputRef.current) {
+            firstFileInputRef.current.click();
         }
     };
 
+    const handleSecondButtonClick = () => {
+        if (secondFileInputRef.current) {
+            secondFileInputRef.current.click();
+        }
+    };
 
     return (
         <Wrap>
             <MainText>Create A New Crossbreed Pet Image Model</MainText>
             <SubText>- Using Two Pet Images -</SubText>
-            <BoxWrap>
-                <ImageBox>
-                    <Form onSubmit={handleSubmit}>
-                        <input
-                            type="file"
-                            onChange={handleFileChange}
-                            ref={fileInputRef}
-                            style={{ display: 'none' }}
-                        />
-                        {preview && <img src={preview} alt="Preview" style={{ maxWidth: '100%' }} />}
-                        {!isUploaded && <Button onClick={handleButtonClick}>Upload Image</Button>}
-                    </Form>
-                </ImageBox>
-                <ImageBox> </ImageBox>
-            </BoxWrap>
+            <ContentWrap>
+                <BoxWrap>
+                    <ImageBox>
+                        <Form>
+                            <input
+                                type="file"
+                                onChange={handleFirstFileChange}
+                                ref={firstFileInputRef}
+                                style={{ display: 'none' }}
+                            />
+                            {firstPreview && <Image src={firstPreview} alt="Preview" />}
+                            <Button type="button" onClick={handleFirstButtonClick}>Upload Image</Button>
+                        </Form>
+                    </ImageBox>
+                    <DescWrap>
+                        <Desc>content percent</Desc>
+                        <Input value={firstInputValue} onChange={(e) => setFirstInputValue(e.target.value)} />
+                        <Desc>%</Desc>
+                    </DescWrap>
+                </BoxWrap>
+                <BoxWrap>
+                    <ImageBox>
+                        <Form>
+                            <input
+                                type="file"
+                                onChange={handleSecondFileChange}
+                                ref={secondFileInputRef}
+                                style={{ display: 'none' }}
+                            />
+                            {secondPreview && <Image src={secondPreview} alt="Preview" />}
+                            <Button type="button" onClick={handleSecondButtonClick}>Upload Image</Button>
+                        </Form>
+                    </ImageBox>
+                    <DescWrap>
+                        <Desc>content percent</Desc>
+                        <Input value={secondInputValue} onChange={(e) => setSecondInputValue(e.target.value)} />
+                        <Desc>%</Desc>
+                    </DescWrap>
+                </BoxWrap>
+            </ContentWrap>
         </Wrap>
     );
 }
