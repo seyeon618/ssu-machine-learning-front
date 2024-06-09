@@ -68,7 +68,7 @@ function Content() {
                         {!isUploaded && <Button onClick={handleButtonClick}>Upload Image</Button>}
                     </Form>
                 </ImageBox>
-                <ImageBox></ImageBox>
+                <ImageBox> </ImageBox>
             </BoxWrap>
         </Wrap>
     );
