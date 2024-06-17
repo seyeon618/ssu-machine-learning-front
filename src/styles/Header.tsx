@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const HeaderWarp = styled.div`
   width: 100%;
-  height: 120px;
-  border-bottom: 1px solid #DFDEDE;
+  height: 60px;
+  border-bottom: 1px solid #dfdede;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,7 +12,6 @@ export const HeaderWarp = styled.div`
 `;
 
 export const IconWrap = styled.div`
-  width: 200px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -21,7 +20,7 @@ export const IconWrap = styled.div`
 `;
 
 export const Image = styled.img`
-    width: 130px;
+  width: 70px;
 `;
 
 export const Text = styled.div`
@@ -29,5 +28,5 @@ export const Text = styled.div`
   font-family: Meongi, SansSerif;
   text-align: center;
   color: darkorange;
-  font-size: 30px;
+  font-size: 15px;
 `;

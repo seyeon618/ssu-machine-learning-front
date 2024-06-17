@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrap = styled.div`
   width: 90%;
   height: 100%;
-  padding-top: 200px;
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -44,7 +44,11 @@ export const BoxWrap = styled.div`
 export const ImageBox = styled.div`
   width: 400px;
   height: 350px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.03), 0 -12px 24px rgba(0, 0, 0, 0.033), 12px 0 24px rgba(0, 0, 0, 0.03), -12px 0 24px rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.03),
+    0 -12px 24px rgba(0, 0, 0, 0.033),
+    12px 0 24px rgba(0, 0, 0, 0.03),
+    -12px 0 24px rgba(0, 0, 0, 0.03);
   border-radius: 50px;
   display: flex;
   flex-direction: column;
@@ -55,7 +59,7 @@ export const ImageBox = styled.div`
 export const Button = styled.button`
   width: 200px;
   height: 50px;
-  background-color: #1170E6;
+  background-color: #1170e6;
   color: white;
   border: none;
   border-radius: 25px;
@@ -90,7 +94,7 @@ export const Desc = styled.div`
   font-size: 25px;
   font-family: Jamsil_light, SansSerif;
   text-align: center;
-  color: #6F6D6D;
+  color: #6f6d6d;
 `;
 
 export const Input = styled.input`
