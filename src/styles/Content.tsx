@@ -59,7 +59,7 @@ export const ImageBox = styled.div`
 export const Button = styled.button`
   width: 200px;
   height: 50px;
-  background-color: #1170e6;
+  background-color: skyblue;
   color: white;
   border: none;
   border-radius: 25px;

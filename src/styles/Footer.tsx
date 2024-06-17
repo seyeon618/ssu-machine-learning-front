@@ -24,3 +24,13 @@ export const IconWrap = styled.div`
   padding: 10px 20px;
   cursor: pointer;
 `;
+
+export const ResultContainer = styled.div`
+  text-align: center;
+`;
+
+export const ResultMessage = styled.div`
+  font-size: 24px;
+  color: black;
+  margin-bottom: 20px;
+`;
