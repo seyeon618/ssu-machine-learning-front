@@ -37,7 +37,7 @@ function Menu({open, setOpen}: Props) {
                             </ProfileTitle>
                             <ProfileAnswer>
                                 <span>박수혜</span>
-                                <span>ID</span>
+                                <span>20221708</span>
                                 <span>기획/디자인</span>
                             </ProfileAnswer>
                         </InfoWrap>
